@@ -5,6 +5,7 @@ import StudentDashboard from "./pages/student/StudentDashboard";
 import AdminDashboard from "./pages/student/AdminDashboard";
 import PayFee from "./pages/student/PayFee";
 import ParentDashboard from "./pages/parent/ParentDashBoard";
+import Receipt from "./pages/Receipt";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/parent" element={<ParentDashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/student/pay/:feeId" element={<PayFee />} />
+        <Route path="/receipt/:paymentId" element={<Receipt />} />
       </Routes>
     </BrowserRouter>
   );

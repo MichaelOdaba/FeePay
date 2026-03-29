@@ -31,9 +31,6 @@ export default function ParentDashboard() {
         .select("*, payments(*, fees(name))")
         .eq("linked_parent_id", user.id);
 
-      console.log("linked students:", linkedStudents);
-      console.log("parent user id:", user.id);
-
       setStudents(linkedStudents || []);
       setLoading(false);
     };
@@ -61,9 +58,9 @@ export default function ParentDashboard() {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-semibold flex items-center justify-center">
-              {profile.full_name.charAt(0)}
+              {profile?.full_name?.charAt(0).toUpperCase()}
             </div>
-            <span className="text-sm text-slate-600">{profile.full_name}</span>
+            <span className="text-sm text-slate-600">{profile?.full_name}</span>
           </div>
           <button
             onClick={handleLogout}
@@ -74,6 +71,7 @@ export default function ParentDashboard() {
           </button>
         </div>
       </nav>
+
       <div className="max-w-5xl mx-auto px-6 py-8 space-y-8">
         {students.length === 0 ? (
           <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 text-center">
@@ -126,6 +124,7 @@ export default function ParentDashboard() {
                         <th className="px-6 py-3 text-left">Status</th>
                         <th className="px-6 py-3 text-left">Receipt No.</th>
                         <th className="px-6 py-3 text-left">Date</th>
+                        <th className="px-6 py-3 text-left">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -158,6 +157,14 @@ export default function ParentDashboard() {
                             {new Date(
                               payment.payment_date
                             ).toLocaleDateString()}
+                          </td>
+                          <td className="px-6 py-3">
+                            <button
+                              onClick={() => navigate(`/receipt/${payment.id}`)}
+                              className="text-blue-600 hover:underline text-sm font-medium"
+                            >
+                              View Receipt
+                            </button>
                           </td>
                         </tr>
                       ))}

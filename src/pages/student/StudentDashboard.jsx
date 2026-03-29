@@ -165,6 +165,7 @@ export default function StudentDashboard() {
                   <th className="px-6 py-3 text-left">Status</th>
                   <th className="px-6 py-3 text-left">Receipt No.</th>
                   <th className="px-6 py-3 text-left">Date</th>
+                  <th className="px-6 py-3 text-left">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -190,6 +191,14 @@ export default function StudentDashboard() {
                     <td className="px-6 py-3">{payment.receipt_number}</td>
                     <td className="px-6 py-3">
                       {new Date(payment.payment_date).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-3">
+                      <button
+                        onClick={() => navigate(`/receipt/${payment.id}`)}
+                        className="text-blue-600 hover:underline text-sm font-medium"
+                      >
+                        View Receipt
+                      </button>
                     </td>
                   </tr>
                 ))}
