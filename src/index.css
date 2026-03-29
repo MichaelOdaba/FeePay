@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@source "../src";
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Inter", sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    margin: 0;
+    padding: 0;
+  }
+}
