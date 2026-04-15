@@ -86,42 +86,44 @@ export default function PayFee() {
     );
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-      <div className="bg-white rounded-2xl shadow-md p-8 w-full max-w-md">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 md:p-0">
+      <div className="bg-white rounded-lg md:rounded-2xl shadow-md p-6 md:p-8 w-full max-w-md">
         {/* Header */}
         <div className="mb-6">
           <button
             onClick={() => navigate("/student")}
-            className="text-sm text-blue-600 hover:underline mb-4 block"
+            className="text-xs md:text-sm text-blue-600 hover:underline mb-4 block"
           >
             ← Back to Dashboard
           </button>
-          <h2 className="text-xl font-bold text-slate-800">Make Payment</h2>
-          <p className="text-slate-500 text-sm mt-1">{fee?.name}</p>
+          <h2 className="text-lg md:text-xl font-bold text-slate-800">
+            Make Payment
+          </h2>
+          <p className="text-xs md:text-sm text-slate-500 mt-1">{fee?.name}</p>
         </div>
 
         {/* Fee Summary */}
         <div className="bg-blue-50 rounded-lg p-4 mb-6">
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between text-xs md:text-sm">
             <span className="text-slate-600">Fee</span>
             <span className="font-medium">{fee?.name}</span>
           </div>
-          <div className="flex justify-between text-sm mt-2">
+          <div className="flex justify-between text-xs md:text-sm mt-2">
             <span className="text-slate-600">Semester</span>
             <span className="font-medium">{fee?.semester}</span>
           </div>
           <div className="flex justify-between mt-3 pt-3 border-t border-blue-100">
-            <span className="font-semibold text-slate-800">Total</span>
-            <span className="font-bold text-blue-700 text-lg">
+            <span className="font-semibold text-slate-800 text-sm">Total</span>
+            <span className="font-bold text-blue-700 text-base md:text-lg">
               ₦{fee?.amount.toLocaleString()}
             </span>
           </div>
         </div>
 
         {/* Simulated Card Form */}
-        <form onSubmit={handlePay} className="space-y-4">
+        <form onSubmit={handlePay} className="space-y-3 md:space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-xs md:text-sm font-medium text-slate-700 mb-1">
               Cardholder Name
             </label>
             <input
@@ -129,11 +131,11 @@ export default function PayFee() {
               placeholder="Michael Odaba"
               value={card.name}
               onChange={(e) => setCard({ ...card, name: e.target.value })}
-              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-slate-200 rounded-lg px-3 md:px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-xs md:text-sm font-medium text-slate-700 mb-1">
               Card Number
             </label>
             <input
@@ -142,12 +144,12 @@ export default function PayFee() {
               maxLength={19}
               value={card.number}
               onChange={(e) => setCard({ ...card, number: e.target.value })}
-              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-slate-200 rounded-lg px-3 md:px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-xs md:text-sm font-medium text-slate-700 mb-1">
                 Expiry Date
               </label>
               <input
@@ -156,11 +158,11 @@ export default function PayFee() {
                 maxLength={5}
                 value={card.expiry}
                 onChange={(e) => setCard({ ...card, expiry: e.target.value })}
-                className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-slate-200 rounded-lg px-3 md:px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-xs md:text-sm font-medium text-slate-700 mb-1">
                 CVV
               </label>
               <input
@@ -169,17 +171,17 @@ export default function PayFee() {
                 maxLength={3}
                 value={card.cvv}
                 onChange={(e) => setCard({ ...card, cvv: e.target.value })}
-                className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-slate-200 rounded-lg px-3 md:px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>
 
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className="text-red-500 text-xs md:text-sm">{error}</p>}
 
           <button
             type="submit"
             disabled={processing}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition disabled:opacity-50"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition disabled:opacity-50 text-sm md:text-base"
           >
             {processing
               ? "Processing payment..."

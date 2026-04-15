@@ -42,17 +42,17 @@ export default function Receipt() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Action Bar - hidden on print */}
-      <div className="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center print:hidden">
+      <div className="bg-white border-b border-slate-200 px-4 md:px-6 py-3 md:py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 print:hidden">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 transition"
+          className="flex items-center gap-2 text-xs md:text-sm text-slate-500 hover:text-slate-700 transition"
         >
           <ArrowLeft size={16} />
           Back
         </button>
         <button
           onClick={() => window.print()}
-          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition"
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-lg transition"
         >
           <Printer size={16} />
           Print Receipt
@@ -60,12 +60,14 @@ export default function Receipt() {
       </div>
 
       {/* Receipt */}
-      <div className="max-w-2xl mx-auto px-6 py-10">
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+      <div className="max-w-2xl mx-auto px-4 md:px-6 py-6 md:py-10">
+        <div className="bg-white rounded-lg md:rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8">
           {/* Header */}
-          <div className="text-center border-b border-slate-100 pb-6 mb-6">
-            <h1 className="text-3xl font-bold text-blue-700">FeePay</h1>
-            <p className="text-slate-500 text-sm mt-1">
+          <div className="text-center border-b border-slate-100 pb-4 md:pb-6 mb-4 md:mb-6">
+            <h1 className="text-2xl md:text-3xl font-bold text-blue-700">
+              FeePay
+            </h1>
+            <p className="text-slate-500 text-xs md:text-sm mt-1">
               Father Adasu University Makurdi (FAUM)
             </p>
             <p className="text-slate-400 text-xs mt-1">
@@ -74,14 +76,14 @@ export default function Receipt() {
           </div>
 
           {/* Receipt Meta */}
-          <div className="flex justify-between text-sm mb-6">
+          <div className="flex flex-col md:flex-row justify-between text-xs md:text-sm mb-4 md:mb-6">
             <div>
               <p className="text-slate-400">Receipt No.</p>
               <p className="font-bold text-slate-800">
                 {payment.receipt_number}
               </p>
             </div>
-            <div className="text-right">
+            <div className="mt-3 md:mt-0 text-right md:text-right">
               <p className="text-slate-400">Date Issued</p>
               <p className="font-bold text-slate-800">
                 {new Date(payment.payment_date).toLocaleDateString("en-GB", {
@@ -94,11 +96,11 @@ export default function Receipt() {
           </div>
 
           {/* Student Info */}
-          <div className="bg-slate-50 rounded-xl p-4 mb-6">
+          <div className="bg-slate-50 rounded-lg md:rounded-xl p-4 mb-4 md:mb-6">
             <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">
               Student Information
             </h2>
-            <div className="grid grid-cols-2 gap-3 text-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs md:text-sm">
               <div>
                 <p className="text-slate-400">Full Name</p>
                 <p className="font-medium text-slate-800">
@@ -111,9 +113,9 @@ export default function Receipt() {
                   {payment.profiles?.student_id}
                 </p>
               </div>
-              <div>
+              <div className="col-span-1 md:col-span-2">
                 <p className="text-slate-400">Email</p>
-                <p className="font-medium text-slate-800">
+                <p className="font-medium text-slate-800 break-all">
                   {payment.profiles?.email}
                 </p>
               </div>
@@ -121,11 +123,11 @@ export default function Receipt() {
           </div>
 
           {/* Payment Info */}
-          <div className="bg-slate-50 rounded-xl p-4 mb-6">
+          <div className="bg-slate-50 rounded-lg md:rounded-xl p-4 mb-4 md:mb-6">
             <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">
               Payment Details
             </h2>
-            <div className="grid grid-cols-2 gap-3 text-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs md:text-sm">
               <div>
                 <p className="text-slate-400">Fee Description</p>
                 <p className="font-medium text-slate-800">
@@ -162,23 +164,27 @@ export default function Receipt() {
           </div>
 
           {/* Remark */}
-          <div className="bg-slate-50 rounded-xl p-4 mb-6">
+          <div className="bg-slate-50 rounded-lg md:rounded-xl p-4 mb-4 md:mb-6">
             <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
               Remark
             </h2>
-            <p className="text-sm text-slate-700">{payment.remark}</p>
+            <p className="text-xs md:text-sm text-slate-700">
+              {payment.remark}
+            </p>
           </div>
 
           {/* Amount */}
-          <div className="border-t border-slate-100 pt-6 flex justify-between items-center">
-            <p className="text-slate-500 font-medium">Total Amount Paid</p>
-            <p className="text-3xl font-bold text-blue-700">
+          <div className="border-t border-slate-100 pt-4 md:pt-6 flex justify-between items-center">
+            <p className="text-slate-500 font-medium text-sm md:text-base">
+              Total Amount Paid
+            </p>
+            <p className="text-2xl md:text-3xl font-bold text-blue-700">
               ₦{payment.amount_paid.toLocaleString()}
             </p>
           </div>
 
           {/* Footer */}
-          <div className="text-center mt-8 pt-6 border-t border-slate-100">
+          <div className="text-center mt-6 md:mt-8 pt-4 md:pt-6 border-t border-slate-100">
             <p className="text-xs text-slate-400">
               This receipt was generated electronically by FeePay.
             </p>

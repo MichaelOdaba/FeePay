@@ -67,16 +67,20 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-      <div className="bg-white rounded-2xl shadow-md p-8 w-full max-w-md">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 md:p-0">
+      <div className="bg-white rounded-lg md:rounded-2xl shadow-md p-6 md:p-8 w-full max-w-md max-h-[90vh] overflow-y-auto">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-blue-700">FeePay</h1>
-          <p className="text-slate-500 mt-1 text-sm">Create your account</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-blue-700">
+            FeePay
+          </h1>
+          <p className="text-slate-500 mt-1 text-xs md:text-sm">
+            Create your account
+          </p>
         </div>
 
-        <form onSubmit={handleRegister} className="space-y-5">
+        <form onSubmit={handleRegister} className="space-y-3 md:space-y-5">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-xs md:text-sm font-medium text-slate-700 mb-1">
               Full Name
             </label>
             <input
@@ -86,12 +90,12 @@ export default function Register() {
               value={form.full_name}
               onChange={handleChange}
               placeholder="Michael Odaba"
-              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-slate-200 rounded-lg px-3 md:px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-xs md:text-sm font-medium text-slate-700 mb-1">
               Email
             </label>
             <input
@@ -101,12 +105,12 @@ export default function Register() {
               value={form.email}
               onChange={handleChange}
               placeholder="you@faum.edu.ng"
-              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-slate-200 rounded-lg px-3 md:px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-xs md:text-sm font-medium text-slate-700 mb-1">
               Password
             </label>
             <input
@@ -116,19 +120,19 @@ export default function Register() {
               value={form.password}
               onChange={handleChange}
               placeholder="••••••••"
-              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-slate-200 rounded-lg px-3 md:px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-xs md:text-sm font-medium text-slate-700 mb-1">
               Role
             </label>
             <select
               name="role"
               value={form.role}
               onChange={handleChange}
-              className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-slate-200 rounded-lg px-3 md:px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="student">Student</option>
               <option value="parent">Parent/Guardian</option>
@@ -138,7 +142,7 @@ export default function Register() {
 
           {isStudent && (
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-xs md:text-sm font-medium text-slate-700 mb-1">
                 Matric Number
               </label>
               <input
@@ -147,13 +151,13 @@ export default function Register() {
                 value={form.student_id}
                 onChange={handleChange}
                 placeholder="FAUM/2021/0001"
-                className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-slate-200 rounded-lg px-3 md:px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           )}
           {isStudent && (
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-xs md:text-sm font-medium text-slate-700 mb-1">
                 Parent/Guardian Email (optional)
               </label>
               <input
@@ -162,23 +166,23 @@ export default function Register() {
                 value={form.linked_parent_email}
                 onChange={handleChange}
                 placeholder="parent@email.com"
-                className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-slate-200 rounded-lg px-3 md:px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           )}
 
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className="text-red-500 text-xs md:text-sm">{error}</p>}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition disabled:opacity-50"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition disabled:opacity-50 text-sm md:text-base"
           >
             {loading ? "Creating account..." : "Create Account"}
           </button>
         </form>
 
-        <p className="text-center text-sm text-slate-500 mt-6">
+        <p className="text-center text-xs md:text-sm text-slate-500 mt-6">
           Already have an account?{" "}
           <a
             href="/login"

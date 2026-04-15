@@ -2,16 +2,40 @@
 @source "../src";
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   *,
   *::before,
   *::after {
     box-sizing: border-box;
   }
+
   body {
     font-family: "Inter", sans-serif;
     background-color: #f8fafc;
     color: #1e293b;
     margin: 0;
     padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Ensure inputs are at least 16px for iOS */
+  input,
+  select,
+  textarea,
+  button {
+    font-size: 16px;
+  }
+
+  /* Touch-friendly tap targets */
+  button,
+  a,
+  input[type="checkbox"],
+  input[type="radio"] {
+    min-height: 44px;
+    min-width: 44px;
   }
 }

@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import StudentDashboard from "./pages/student/StudentDashboard";
-import AdminDashboard from "./pages/student/AdminDashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 import PayFee from "./pages/student/PayFee";
 import ParentDashboard from "./pages/parent/ParentDashBoard";
 import Receipt from "./pages/Receipt";

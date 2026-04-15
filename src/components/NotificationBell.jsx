@@ -52,8 +52,8 @@ export default function NotificationBell() {
         onClick={handleOpen}
         className="relative p-2 rounded-full hover:bg-slate-100 transition"
       >
-        <span className="text-xl text-slate-600">
-          <Bell />
+        <span className="text-lg md:text-xl text-slate-600">
+          <Bell size={20} />
         </span>
         {unreadCount > 0 && (
           <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
@@ -63,26 +63,26 @@ export default function NotificationBell() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-slate-100 z-50">
-          <div className="px-4 py-3 border-b border-slate-100">
-            <h3 className="font-semibold text-slate-800 text-sm">
+        <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-white rounded-lg md:rounded-xl shadow-lg border border-slate-100 z-50 max-h-96 overflow-hidden flex flex-col">
+          <div className="px-4 py-3 border-b border-slate-100 flex-shrink-0">
+            <h3 className="font-semibold text-slate-800 text-xs md:text-sm">
               Notifications
             </h3>
           </div>
           {notifications.length === 0 ? (
-            <p className="text-slate-400 text-sm px-4 py-4">
+            <p className="text-slate-400 text-xs md:text-sm px-4 py-4">
               No notifications yet.
             </p>
           ) : (
-            <ul>
+            <ul className="overflow-y-auto flex-1">
               {notifications.map((n) => (
                 <li
                   key={n.id}
-                  className={`px-4 py-3 border-b border-slate-50 text-sm ${
+                  className={`px-4 py-3 border-b border-slate-50 text-xs md:text-sm ${
                     !n.is_read ? "bg-blue-50" : ""
                   }`}
                 >
-                  <p className="text-slate-700">{n.message}</p>
+                  <p className="text-slate-700 line-clamp-2">{n.message}</p>
                   <p className="text-slate-400 text-xs mt-1">
                     {new Date(n.created_at).toLocaleDateString()}
                   </p>
