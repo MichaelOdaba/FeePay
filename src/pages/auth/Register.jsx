@@ -10,20 +10,56 @@ export default function Register() {
     role: "student",
     student_id: "",
     linked_parent_email: "",
+    admin_code: "",
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const isStudent = form.role === "student";
+  const isAdmin = form.role === "admin";
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const validateAdminCode = async (code) => {
+    if (!code) {
+      setError("Admin registration code is required");
+      return false;
+    }
+
+    const { data, error } = await supabase
+      .from("admin_codes")
+      .select("id, is_used")
+      .eq("code", code)
+      .single();
+
+    if (error || !data) {
+      setError("Invalid admin registration code");
+      return false;
+    }
+
+    if (data.is_used) {
+      setError("This admin code has already been used");
+      return false;
+    }
+
+    return true;
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+
+    // Validate admin code if registering as admin
+    if (isAdmin) {
+      const isValidCode = await validateAdminCode(form.admin_code);
+      if (!isValidCode) {
+        setLoading(false);
+        return;
+      }
+    }
 
     const { data, error } = await supabase.auth.signUp({
       email: form.email,
@@ -60,6 +96,14 @@ export default function Register() {
       setError(profileError.message);
       setLoading(false);
       return;
+    }
+
+    // Mark admin code as used
+    if (isAdmin) {
+      await supabase
+        .from("admin_codes")
+        .update({ is_used: true })
+        .eq("code", form.admin_code);
     }
 
     navigate("/login");
@@ -139,6 +183,26 @@ export default function Register() {
               <option value="admin">Admin/Bursary</option>
             </select>
           </div>
+
+          {isAdmin && (
+            <div>
+              <label className="block text-xs md:text-sm font-medium text-slate-700 mb-1">
+                Admin Registration Code
+              </label>
+              <input
+                type="text"
+                name="admin_code"
+                required={isAdmin}
+                value={form.admin_code}
+                onChange={handleChange}
+                placeholder="Enter your admin code"
+                className="w-full border border-slate-200 rounded-lg px-3 md:px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <p className="text-slate-500 text-xs mt-1">
+                Contact your institution to obtain an admin registration code
+              </p>
+            </div>
+          )}
 
           {isStudent && (
             <div>
